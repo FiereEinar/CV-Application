@@ -1,13 +1,21 @@
 import { useState } from 'react'
-import PersonalDetails from './components/PersonalDetails.jsx'
 import testData from './testData.js'
+import PersonalDetails from './components/PersonalDetails.jsx'
+import EducationSection from './components/EducationSection.jsx'
 
 function App() {
   const [personalInfo, setPersonalInfo] = useState(testData.personalInfo)
+  const [educationInfo, setEducationInfo] = useState(testData.educationInfo)
+  const [expandedToggle, setExpandedToggle] = useState({ education: false, experience: false })
   
   const personalInfoChangeHandler = (e) => {
     const { key } = e.target.dataset
     setPersonalInfo({ ...personalInfo, [key]: e.target.value })
+  }
+  
+  const expandComponent = (e) => {
+    const { key } = e.target.dataset
+    setExpandedToggle({ ...expandedToggle, [key]: !expandedToggle[key] })
   }
   
   return (
@@ -19,6 +27,11 @@ function App() {
           address={personalInfo.address}
           number={personalInfo.number}
           onChange={personalInfoChangeHandler}
+        />
+        <EducationSection
+          data={educationInfo}
+          onClick={expandComponent}
+          isOpen={expandedToggle.education}
         />
       </div>
       <div className="text-white">
