@@ -4,6 +4,8 @@ import PersonalDetails from './components/PersonalDetails.jsx'
 import EducationSection from './components/EducationSection.jsx'
 import Resume from './components/resume/Resume.jsx'
 
+import createEducation from './classes/education.js'
+
 function App() {
   const [personalInfo, setPersonalInfo] = useState(testData.personalInfo)
   const [educationInfo, setEducationInfo] = useState(testData.educationInfo)
@@ -43,6 +45,20 @@ function App() {
   
   const onSubmit = (e) => {
     e.preventDefault()
+    const { key } = e.target.dataset
+    const newEducation = JSON.parse(JSON.stringify(currentEdited))
+    
+    setCurrentEdited(null)
+    setMode({ ...mode, [key]: 'none'})
+    setEducationInfo([ ...educationInfo, newEducation ])
+  }
+  
+  const addEducationHandler  = (e) => {
+    const { key } = e.target.dataset
+    const newEducation = createEducation()
+    
+    setMode({ ...mode, [key]: 'edit'})
+    setCurrentEdited(newEducation)
   }
   
   return (
@@ -62,7 +78,7 @@ function App() {
           onTypeEdit={educationInfoChangeHandler}
           currentEdited={currentEdited}
           onSubmit={onSubmit}
-//           onAdd={}
+          onAdd={addEducationHandler}
           mode={mode.education}
           isOpen={expandedToggle.education}
         />

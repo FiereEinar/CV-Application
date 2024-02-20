@@ -1,6 +1,6 @@
 import InputField from './InputField.jsx'
 
-export default function EducationSection({ data, onClick, isOpen, mode, onEdit, currentEdited, onTypeEdit, onSubmit }) {
+export default function EducationSection({ data, onClick, isOpen, mode, onEdit, currentEdited, onTypeEdit, onSubmit, onAdd }) {
   return (
     <div className='text-white flex flex-col'>
       <button
@@ -23,13 +23,13 @@ export default function EducationSection({ data, onClick, isOpen, mode, onEdit, 
               </button>
             ))}
           </div>
-          <button className='p-2 border w-full rounded'>
+          <button data-key='education' className='p-2 border w-full rounded' onClick={onAdd}>
             Add Education
           </button>
         </div>
       }
       {isOpen && mode === 'edit' && currentEdited !== null &&
-        <form className='text-black' onSubmit={onSubmit}>
+        <form className='text-black'>
           <InputField
             label='University'
             type='text'
@@ -73,7 +73,7 @@ export default function EducationSection({ data, onClick, isOpen, mode, onEdit, 
           {isOpen && mode === 'edit' && 
             <div className='text-white flex justify-evenly p-2'>
               <button className='border p-1 rounded' onClick={onSubmit}>Cancel</button>
-              <button className='border p-1 rounded' type='submit'>Submit</button>
+              <button className='border p-1 rounded' data-key='education' onClick={onSubmit}>Submit</button>
             </div>
           }
         </form>
