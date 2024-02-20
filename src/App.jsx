@@ -18,15 +18,12 @@ function App() {
   
   const educationInfoChangeHandler = (e) => {
     const { key } = e.target.dataset
+    let newEducationInfo = JSON.parse(JSON.stringify(educationInfo))
     setCurrentEdited({ ...currentEdited, [key]: e.target.value})
     
-    const education = JSON.parse(JSON.stringify(currentEdited))
-    let newEducationInfo = JSON.parse(JSON.stringify(educationInfo))
-    
-    newEducationInfo = newEducationInfo.filter((edu) => edu.id !== currentEdited.id)
-    newEducationInfo.push(education)
-    console.log(newEducationInfo)
-    console.log(currentEdited)
+    newEducationInfo.map((edu) => {
+      if (edu.id === currentEdited.id) edu[key] = e.target.value
+    })
     setEducationInfo(newEducationInfo)
   }
   
@@ -42,6 +39,10 @@ function App() {
     
     setMode({ ...mode, [key]: 'edit'})
     setCurrentEdited(beingEdited)
+  }
+  
+  const onSubmit = (e) => {
+    e.preventDefault()
   }
   
   return (
@@ -60,6 +61,7 @@ function App() {
           onEdit={editingHandler}
           onTypeEdit={educationInfoChangeHandler}
           currentEdited={currentEdited}
+          onSubmit={onSubmit}
 //           onAdd={}
           mode={mode.education}
           isOpen={expandedToggle.education}

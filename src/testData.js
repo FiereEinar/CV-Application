@@ -11,9 +11,17 @@ const testData = {
       school: 'Bukidnon State University',
       degree: 'Bachelor of Science in Information Technology',
       location: 'Malaybalay City',
-      startDate: '09-10-2002',
-      endDate: '10-13-2025',
+      startDate: '2002-09-23',
+      endDate: '2025-08-30',
       id: '0965'
+    },
+    {
+      school: 'Bukidnon State',
+      degree: 'Bachelor of Science in Information Technology',
+      location: 'Malaybalay City',
+      startDate: '2002-09-23',
+      endDate: '2025-08-30',
+      id: '2356'
     },
   ],
 }
