@@ -5,6 +5,7 @@ import EducationSection from './components/EducationSection.jsx'
 import Resume from './components/resume/Resume.jsx'
 
 import createEducation from './classes/education.js'
+import * as utils from './js/utils.js'
 
 function App() {
   const [personalInfo, setPersonalInfo] = useState(testData.personalInfo)
@@ -12,6 +13,7 @@ function App() {
   const [expandedToggle, setExpandedToggle] = useState({ education: false, experience: false })
   const [mode, setMode] = useState({ education: 'none', experience: 'none' })
   const [currentEdited, setCurrentEdited] = useState(null)
+  const [previousEdited, setPreviousEdited] = useState(null)
   
   const personalInfoChangeHandler = (e) => {
     const { key } = e.target.dataset
@@ -41,24 +43,54 @@ function App() {
     
     setMode({ ...mode, [key]: 'edit'})
     setCurrentEdited(beingEdited)
+    setPreviousEdited(beingEdited)
   }
   
   const onSubmit = (e) => {
     e.preventDefault()
     const { key } = e.target.dataset
-    const newEducation = JSON.parse(JSON.stringify(currentEdited))
+    
+    if (mode[key] === 'add') {
+      const newEducation = JSON.parse(JSON.stringify(currentEdited))
+      setEducationInfo([ ...educationInfo, newEducation ])
+    }
     
     setCurrentEdited(null)
     setMode({ ...mode, [key]: 'none'})
-    setEducationInfo([ ...educationInfo, newEducation ])
   }
   
   const addEducationHandler  = (e) => {
     const { key } = e.target.dataset
     const newEducation = createEducation()
     
-    setMode({ ...mode, [key]: 'edit'})
+    setMode({ ...mode, [key]: 'add'})
     setCurrentEdited(newEducation)
+  }
+  
+  const onCancel = (e) => {
+    e.preventDefault()
+    const { mode } = e.target.dataset
+    const { key } = e.target.dataset
+    
+    if (mode === 'edit') {
+      const previousData = utils.copyData(previousEdited)
+      
+      if (key === 'education') {
+        let newEducationInfo = utils.copyData(educationInfo)
+
+        newEducationInfo.forEach((x) => {
+          if (x.id === previousData.id) {
+            x = {...previousData}
+          }
+        })
+        console.log(previousData)
+        console.log(newEducationInfo)
+        setEducationInfo(newEducationInfo)
+      }
+    }
+    
+    setCurrentEdited(null)
+    setMode({ ...mode, [key]: 'none'})
   }
   
   return (
@@ -79,6 +111,7 @@ function App() {
           currentEdited={currentEdited}
           onSubmit={onSubmit}
           onAdd={addEducationHandler}
+          onCancel={onCancel}
           mode={mode.education}
           isOpen={expandedToggle.education}
         />

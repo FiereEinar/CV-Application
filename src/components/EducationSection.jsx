@@ -1,6 +1,6 @@
 import InputField from './InputField.jsx'
 
-export default function EducationSection({ data, onClick, isOpen, mode, onEdit, currentEdited, onTypeEdit, onSubmit, onAdd }) {
+export default function EducationSection({ data, onClick, isOpen, mode, onEdit, currentEdited, onTypeEdit, onSubmit, onAdd, onCancel }) {
   return (
     <div className='text-white flex flex-col'>
       <button
@@ -28,7 +28,7 @@ export default function EducationSection({ data, onClick, isOpen, mode, onEdit, 
           </button>
         </div>
       }
-      {isOpen && mode === 'edit' && currentEdited !== null &&
+      {(isOpen && currentEdited !== null)  && (mode === 'edit' || mode === 'add') &&
         <form className='text-black'>
           <InputField
             label='University'
@@ -70,12 +70,15 @@ export default function EducationSection({ data, onClick, isOpen, mode, onEdit, 
             dataKey='endDate'
             onChange={onTypeEdit}
           />
-          {isOpen && mode === 'edit' && 
-            <div className='text-white flex justify-evenly p-2'>
-              <button className='border p-1 rounded' onClick={onSubmit}>Cancel</button>
+          <div className='text-white flex justify-evenly p-2'>
+            <button className='border p-1 rounded' data-mode={mode} data-key={'education'} onClick={onCancel}>Cancel</button>
+            {mode === 'edit' && 
+              <button className='border p-1 rounded' data-key='education' onClick={onSubmit}>Save</button>
+            }
+            {mode === 'add' &&
               <button className='border p-1 rounded' data-key='education' onClick={onSubmit}>Submit</button>
-            </div>
-          }
+            }
+          </div>
         </form>
       }
     </div>
