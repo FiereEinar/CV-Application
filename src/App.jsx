@@ -76,19 +76,18 @@ function App() {
       const previousData = utils.copyData(previousEdited)
       
       if (key === 'education') {
-        const newEducationInfo = []
+        const newEducationInfo = utils.copyData(educationInfo)
 
-        educationInfo.forEach((x) => {
+        newEducationInfo.forEach((x) => {
           if (x.id === previousData.id) {
-            newEducationInfo.push(previousData)
-          } else {
-            newEducationInfo.push(x)
+            for (const [key, value] of Object.entries(x)) {
+              x[key] = previousData[key]
+            }
           }
         })
         setEducationInfo(newEducationInfo)
       }
     }
-    
     setCurrentEdited(null)
     setMode({ ...mode, [key]: 'none'})
   }
