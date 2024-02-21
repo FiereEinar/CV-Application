@@ -10,11 +10,9 @@ import * as utils from './js/utils.js'
 function App() {
   const [personalInfo, setPersonalInfo] = useState(testData.personalInfo)
   const [educationInfo, setEducationInfo] = useState(testData.educationInfo)
-  const [expandedToggle, setExpandedToggle] = useState({ education: false, experience: false })
   const [mode, setMode] = useState({ education: 'none', experience: 'none' })
-  const [currentEdited, setCurrentEdited] = useState(null)
-  const [previousEdited, setPreviousEdited] = useState(null)
-  
+  const [edit, setEdit] = useState({ current: null, previous: null })
+ 
   const personalInfoChangeHandler = (e) => {
     const { key } = e.target.dataset
     setPersonalInfo({ ...personalInfo, [key]: e.target.value })
@@ -22,18 +20,13 @@ function App() {
   
   const educationInfoChangeHandler = (e) => {
     const { key } = e.target.dataset
-    let newEducationInfo = JSON.parse(JSON.stringify(educationInfo))
-    setCurrentEdited({ ...currentEdited, [key]: e.target.value})
+    let newEducationInfo = utils.copyData(educationInfo)
+    setEdit({ current: { ...edit.current, [key]: e.target.value }, previous: { ...edit.previous }})
     
     newEducationInfo.map((edu) => {
-      if (edu.id === currentEdited.id) edu[key] = e.target.value
+     if (edu.id === edit.current.id) edu[key] = e.target.value
     })
     setEducationInfo(newEducationInfo)
-  }
-  
-  const expandComponent = (e) => {
-    const { key } = e.target.dataset
-    setExpandedToggle({ ...expandedToggle, [key]: !expandedToggle[key] })
   }
   
   const editingHandler = (e) => {
@@ -42,8 +35,7 @@ function App() {
     const beingEdited = educationInfo.find((x) => x.id === id)
     
     setMode({ ...mode, [key]: 'edit'})
-    setCurrentEdited(beingEdited)
-    setPreviousEdited(beingEdited)
+    setEdit({ current: beingEdited, previous: beingEdited })
   }
   
   const onSubmit = (e) => {
@@ -51,11 +43,11 @@ function App() {
     const { key } = e.target.dataset
     
     if (mode[key] === 'add') {
-      const newEducation = JSON.parse(JSON.stringify(currentEdited))
+      const newEducation = utils.copyData(edit.current)
       setEducationInfo([ ...educationInfo, newEducation ])
     }
     
-    setCurrentEdited(null)
+    setEdit({ current: null, previous: { ...edit.previous }})
     setMode({ ...mode, [key]: 'none'})
   }
   
@@ -64,7 +56,7 @@ function App() {
     const newEducation = createEducation()
     
     setMode({ ...mode, [key]: 'add'})
-    setCurrentEdited(newEducation)
+    setEdit({ current: newEducation, previous: { ...edit.previous }})
   }
   
   const onCancel = (e) => {
@@ -73,7 +65,7 @@ function App() {
     const { key } = e.target.dataset
     
     if (mode === 'edit') {
-      const previousData = utils.copyData(previousEdited)
+      const previousData = utils.copyData(edit.previous)
       
       if (key === 'education') {
         const newEducationInfo = utils.copyData(educationInfo)
@@ -88,7 +80,7 @@ function App() {
         setEducationInfo(newEducationInfo)
       }
     }
-    setCurrentEdited(null)
+    setEdit({ current: null, previous: { ...edit.previous }})
     setMode({ ...mode, [key]: 'none'})
   }
   
@@ -104,15 +96,13 @@ function App() {
         />
         <EducationSection
           data={educationInfo}
-          onClick={expandComponent}
           onEdit={editingHandler}
           onTypeEdit={educationInfoChangeHandler}
-          currentEdited={currentEdited}
+          currentEdited={edit.current}
           onSubmit={onSubmit}
           onAdd={addEducationHandler}
           onCancel={onCancel}
           mode={mode.education}
-          isOpen={expandedToggle.education}
         />
       </div>
       <Resume

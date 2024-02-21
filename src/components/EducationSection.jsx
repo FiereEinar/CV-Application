@@ -1,12 +1,19 @@
 import InputField from './InputField.jsx'
-
-export default function EducationSection({ data, onClick, isOpen, mode, onEdit, currentEdited, onTypeEdit, onSubmit, onAdd, onCancel }) {
+import { useState } from 'react'
+export default function EducationSection({ data, mode, onEdit, currentEdited, onTypeEdit, onSubmit, onAdd, onCancel }) {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  const expandComponent = (e) => {
+    const { key } = e.target.dataset
+    setIsOpen(!isOpen)
+  }
+  
   return (
     <div className='text-white flex flex-col'>
       <button
         className='p-2 border rounded' 
         data-key='education'
-        onClick={onClick}
+        onClick={expandComponent}
       >
       Education 
       </button>
