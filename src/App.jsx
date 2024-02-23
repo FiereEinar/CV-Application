@@ -94,9 +94,9 @@ function App() {
   
   const onCancel = (e) => {
     e.preventDefault()
-    const { mode, key } = e.target.dataset
+    const { currentMode, key } = e.target.dataset
     
-    if (mode === 'edit') {
+    if (currentMode === 'edit') {
       const previousData = utils.copyData(edit.previous)
       
       if (key === 'education') {
