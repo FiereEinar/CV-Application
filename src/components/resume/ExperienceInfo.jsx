@@ -1,7 +1,7 @@
-export default function EducationInfo({ educationInfo }) {
+export default function ExperienceInfo({ experienceInfo }) {
   return (
     <section>
-      {educationInfo.map((data) => (
+      {experienceInfo.map((data) => (
         <div key={data.id}>
           <aside>
             <p>{data.startDate}</p>
@@ -9,8 +9,9 @@ export default function EducationInfo({ educationInfo }) {
             <p>{data.location}</p>
           </aside>
           <main>
-            <p>{data.school}</p>
-            <p>{data.degree}</p>
+            <p>{data.company}</p>
+            <p>{data.position}</p>
+            <p>{data.description}</p>
           </main>
         </div>
       ))}

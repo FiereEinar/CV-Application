@@ -24,6 +24,18 @@ const testData = {
       id: '2356'
     },
   ],
+  
+  experienceInfo: [
+    {
+      company: 'Bukidnon Testing Unit',
+      position: 'Unit Tester',
+      location: 'Bukidnon Region',
+      description: 'I worked at this company as a Unit Tester that tests stuff',
+      startDate: '2002-09-23',
+      endDate: '2025-08-30',
+      id: '2738'
+    },
+  ],
 }
 
 export default testData
