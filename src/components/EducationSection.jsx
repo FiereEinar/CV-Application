@@ -25,13 +25,15 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
               <button 
                 className='border p-2 rounded w-full' 
                 key={edu.id}
+                id={edu.id}
+                data-key='education'
                 onClick={onEdit}
               >
                 <p id={edu.id} data-key='education'>{edu.school}</p>
               </button>
             ))}
           </div>
-          <button data-key='education' className='p-2 border w-full rounded' onClick={onAdd}>
+          <button data-key='education' className='p-2 border w-full rounded bg-blue-200' onClick={onAdd}>
             Add Education
           </button>
         </div>

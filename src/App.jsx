@@ -94,10 +94,10 @@ function App() {
   
   const onCancel = (e) => {
     e.preventDefault()
-    const { currentMode } = e.target.dataset
+    const { mode } = e.target.dataset
     const { key } = e.target.dataset
     
-    if (currentMode === 'edit') {
+    if (mode === 'edit') {
       const previousData = utils.copyData(edit.previous)
       
       if (key === 'education') {
@@ -105,11 +105,12 @@ function App() {
 
         newEducationInfo.forEach((x) => {
           if (x.id === previousData.id) {
-            for (const [key, value] of Object.entries(x)) {
-              x[key] = previousData[key]
+            for (const [dataKey, value] of Object.entries(x)) {
+              x[dataKey] = previousData[dataKey]
             }
           }
         })
+        
         setEducationInfo(newEducationInfo)
       }
       
@@ -118,8 +119,8 @@ function App() {
         
         newExperienceInfo.forEach((x) => {
           if (x.id === previousData.id) {
-            for (const [key, value] of Object.entries(x)) {
-              x[key] = previousData[key]
+            for (const [dataKey, value] of Object.entries(x)) {
+              x[dataKey] = previousData[dataKey]
             }
           }
         })
@@ -127,7 +128,7 @@ function App() {
       }
     }
     setEdit({ current: null, previous: { ...edit.previous }})
-    setMode({ ...mode, [key]: 'none' })
+    setMode((prevMode) => ({ ...prevMode, [key]: 'none' }))
   }
   
   return (

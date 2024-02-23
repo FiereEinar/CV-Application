@@ -25,13 +25,15 @@ export default function ExperienceSection({ data, mode, onEdit, currentEdited, o
               <button 
                 className='border p-2 rounded w-full' 
                 key={exp.id}
+                id={exp.id}
+                data-key='experience'
                 onClick={onEdit}
               >
                 <p id={exp.id} data-key='experience'>{exp.company}</p>
               </button>
             ))}
           </div>
-          <button data-key='experience' className='p-2 border w-full rounded' onClick={onAdd}>
+          <button data-key='experience' className='p-2 border w-full rounded bg-blue-200' onClick={onAdd}>
             Add Experience
           </button>
         </div>
