@@ -10,9 +10,9 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
   }
   
   return (
-    <div className='text-white flex flex-col'>
+    <div className=' flex flex-col gap-3'>
       <button
-        className='p-2 border rounded' 
+        className='p-2 border rounded shadow' 
         data-key='education'
         onClick={expandComponent}
       >
@@ -37,7 +37,7 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
         </div>
       }
       {(isOpen && currentEdited !== null)  && (mode === 'edit' || mode === 'add') &&
-        <form className='text-black'>
+        <form className='text-black flex flex-col gap-2'>
           <InputField
             label='University'
             type='text'
@@ -78,13 +78,13 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
             dataKey='endDate'
             onChange={onTypeEdit}
           />
-          <div className='text-white flex justify-evenly p-2'>
-            <button className='border p-1 rounded' data-mode={mode} data-key={'education'} onClick={onCancel}>Cancel</button>
+          <div className=' flex justify-evenly p-2'>
+            <button className='border p-1 rounded w-1/3' data-mode={mode} data-key={'education'} onClick={onCancel}>Cancel</button>
             {mode === 'edit' && 
-              <button className='border p-1 rounded' data-key='education' onClick={onSubmit}>Save</button>
+              <button className='border p-1 rounded w-1/3' data-key='education' onClick={onSubmit}>Save</button>
             }
             {mode === 'add' &&
-              <button className='border p-1 rounded' data-key='education' onClick={onSubmit}>Submit</button>
+              <button className='border p-1 rounded w-1/3' data-key='education' onClick={onSubmit}>Submit</button>
             }
           </div>
         </form>

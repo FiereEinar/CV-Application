@@ -4,7 +4,7 @@ import ExperienceInfo from './ExperienceInfo.jsx'
 
  export default function Resume({ personalInfo, educationInfo, experienceInfo }) {
    return (
-     <section className='text-white'>
+     <section className='shadow-2xl w-fit'>
         <PersonalInfo 
           personalInfo={personalInfo}
         />

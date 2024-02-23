@@ -2,7 +2,7 @@ import InputField from './InputField.jsx'
 
 export default function PersonalDetails({name, number, address, email, onChange}) {
   return (
-    <form>
+    <form className='flex flex-col gap-2'>
       <InputField
         label='Full Name'
         type='text'

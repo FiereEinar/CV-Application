@@ -94,7 +94,8 @@ function App() {
   
   const onCancel = (e) => {
     e.preventDefault()
-    const { currentMode, key } = e.target.dataset
+    const { currentMode } = e.target.dataset
+    const { key } = e.target.dataset
     
     if (currentMode === 'edit') {
       const previousData = utils.copyData(edit.previous)
@@ -130,8 +131,9 @@ function App() {
   }
   
   return (
-    <div className="bg-blue-950 min-h-screen w-full p-10 flex justify-center items-start">
-      <div>
+    <div className=" min-h-screen w-full p-10 flex justify-center items-start gap-5">
+      <div className='flex flex-col gap-5 shadow p-5 rounded shadow-2xl'>
+        <h1 className='font-medium text-2xl'>Personal Details</h1>
         <PersonalDetails
           name={personalInfo.fullname}
           email={personalInfo.email}

@@ -10,9 +10,9 @@ export default function ExperienceSection({ data, mode, onEdit, currentEdited, o
   }
   
   return (
-    <div className='text-white flex flex-col'>
+    <div className=' flex flex-col gap-3'>
       <button
-        className='p-2 border rounded' 
+        className='p-2 border rounded shadow' 
         data-key='experience'
         onClick={expandComponent}
       >
@@ -37,7 +37,7 @@ export default function ExperienceSection({ data, mode, onEdit, currentEdited, o
         </div>
       }
       {(isOpen && currentEdited !== null)  && (mode === 'edit' || mode === 'add') &&
-        <form className='text-black'>
+        <form className='text-black flex flex-col gap-3'>
           <InputField
             label='Company Name'
             type='text'
@@ -86,13 +86,13 @@ export default function ExperienceSection({ data, mode, onEdit, currentEdited, o
             dataKey='description'
             onChange={onTypeEdit}
           />
-          <div className='text-white flex justify-evenly p-2'>
-            <button className='border p-1 rounded' data-mode={mode} data-key='experience' onClick={onCancel}>Cancel</button>
+          <div className=' flex justify-evenly p-2'>
+            <button className='border p-1 rounded w-1/3' data-mode={mode} data-key='experience' onClick={onCancel}>Cancel</button>
             {mode === 'edit' && 
-              <button className='border p-1 rounded' data-key='experience' onClick={onSubmit}>Save</button>
+              <button className='border p-1 rounded w-1/3' data-key='experience' onClick={onSubmit}>Save</button>
             }
             {mode === 'add' &&
-              <button className='border p-1 rounded' data-key='experience' onClick={onSubmit}>Submit</button>
+              <button className='border p-1 rounded w-1/3' data-key='experience' onClick={onSubmit}>Submit</button>
             }
           </div>
         </form>
