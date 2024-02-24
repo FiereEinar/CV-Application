@@ -1,7 +1,7 @@
 import InputField from './InputField.jsx'
 import { useState } from 'react'
 
-export default function EducationSection({ data, mode, onEdit, currentEdited, onTypeEdit, onSubmit, onAdd, onCancel }) {
+export default function EducationSection({ data, mode, onEdit, currentEdited, onDelete, onTypeEdit, onSubmit, onAdd, onCancel }) {
   const [isOpen, setIsOpen] = useState(false)
   
   const expandComponent = (e) => {
@@ -81,7 +81,22 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
             onChange={onTypeEdit}
           />
           <div className=' flex justify-evenly p-2'>
-            <button className='border p-1 rounded w-1/3' data-mode={mode} data-key={'education'} onClick={onCancel}>Cancel</button>
+            <button 
+              className='border p-1 rounded w-1/3' 
+              data-mode={mode} 
+              data-key={'education'} 
+              onClick={onCancel}
+            >
+            Cancel
+            </button>
+            <button 
+              className='border p-1 rounded w-1/3' 
+              data-mode={mode} 
+              data-key='education' 
+              onClick={onDelete}
+            >
+            Delete
+            </button>
             {mode === 'edit' && 
               <button className='border p-1 rounded w-1/3' data-key='education' onClick={onSubmit}>Save</button>
             }

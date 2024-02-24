@@ -92,6 +92,28 @@ function App() {
     setEdit({ current: newExperience, previous: { ...edit.previous }})
   }
   
+  const onDelete = (e) => {
+    e.preventDefault()
+    const { key } = e.target.dataset
+    
+    if (key === 'education') {
+      let newEducationInfo = utils.copyData(educationInfo)
+      
+      newEducationInfo = newEducationInfo.filter((x) => x.id !== edit.current.id)
+      setEducationInfo(newEducationInfo)
+    }
+    
+    if (key === 'experience') {
+      let newExperienceInfo = utils.copyData(experienceInfo)
+      
+      newExperienceInfo = newExperienceInfo.filter((x) => x.id !== edit.current.id)
+      setExperienceInfo(newExperienceInfo)
+    }
+    
+    setEdit({ current: null, previous: null})
+    setMode((prevMode) => ({ ...prevMode, [key]: 'none' }))
+  }
+  
   const onCancel = (e) => {
     e.preventDefault()
     const { mode } = e.target.dataset
@@ -151,6 +173,7 @@ function App() {
           onSubmit={onSubmit}
           onAdd={addEducationHandler}
           onCancel={onCancel}
+          onDelete={onDelete}
         />
         <ExperienceSection 
           data={experienceInfo}
