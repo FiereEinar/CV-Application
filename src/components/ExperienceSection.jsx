@@ -20,21 +20,25 @@ export default function ExperienceSection({ data, mode, onEdit, currentEdited, o
       </button>
       {isOpen && mode === 'none' &&
         <div>
-          <div className='flex flex-col gap-1 my-1'>
+          <div className='flex flex-col gap-1 my-1 justify-center items-center'>
             {data.map((exp) => (
               <button 
-                className='border p-2 rounded w-full' 
+                className='border p-2 rounded w-48 truncate' 
                 key={exp.id}
                 id={exp.id}
                 data-key='experience'
                 onClick={onEdit}
               >
-                <p id={exp.id} data-key='experience'>{exp.company}</p>
+                {exp.company}
               </button>
             ))}
           </div>
-          <button data-key='experience' className='p-2 border w-full rounded bg-blue-200' onClick={onAdd}>
-            Add Experience
+          <button 
+            data-key='experience' 
+            className='p-2 border w-full rounded bg-blue-200 mt-2' 
+            onClick={onAdd}
+          >
+            Add Experience +
           </button>
         </div>
       }

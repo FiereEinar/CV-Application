@@ -20,21 +20,25 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
       </button>
       {isOpen && mode === 'none' &&
         <div>
-          <div className='flex flex-col gap-1 my-1'>
+          <div className='flex flex-col gap-1 my-1 justify-center items-center'>
             {data.map((edu) => (
               <button 
-                className='border p-2 rounded w-full' 
+                className='border p-2 rounded w-48 truncate' 
                 key={edu.id}
                 id={edu.id}
                 data-key='education'
                 onClick={onEdit}
               >
-                <p id={edu.id} data-key='education'>{edu.school}</p>
+                {edu.school}
               </button>
             ))}
           </div>
-          <button data-key='education' className='p-2 border w-full rounded bg-blue-200' onClick={onAdd}>
-            Add Education
+          <button 
+            data-key='education' 
+            className='p-2 border w-full rounded bg-blue-200 mt-2' 
+            onClick={onAdd}
+          >
+            Add Education +
           </button>
         </div>
       }
