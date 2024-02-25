@@ -12,7 +12,8 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
   return (
     <div className=' flex flex-col gap-3'>
       <button
-        className='p-2 border rounded shadow' 
+        className='p-2 border rounded shadow 
+        btn-transition' 
         data-key='education'
         onClick={expandComponent}
       >
@@ -21,9 +22,13 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
       {isOpen && mode === 'none' &&
         <div>
           <div className='flex flex-col gap-1 my-1 justify-center items-center'>
+            {data.length === 0 &&
+              <p>No items here...</p>
+            }
             {data.map((edu) => (
               <button 
-                className='border p-2 rounded w-48 truncate' 
+                className='border p-2 rounded w-48 truncate
+                btn-transition' 
                 key={edu.id}
                 id={edu.id}
                 data-key='education'
@@ -35,7 +40,8 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
           </div>
           <button 
             data-key='education' 
-            className='p-2 border w-full rounded bg-blue-200 mt-2' 
+            className='p-2 border w-full rounded transition-all 
+            bg-blue-100 hover:bg-blue-200 mt-2' 
             onClick={onAdd}
           >
             Add Education +
@@ -86,7 +92,7 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
           />
           <div className=' flex justify-evenly p-2'>
             <button 
-              className='border p-1 rounded w-1/3' 
+              className='border p-1 rounded w-1/3 btn-transition' 
               data-mode={mode} 
               data-key={'education'} 
               onClick={onCancel}
@@ -94,7 +100,7 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
             Cancel
             </button>
             <button 
-              className='border p-1 rounded w-1/3' 
+              className='border p-1 rounded w-1/3 btn-transition' 
               data-mode={mode} 
               data-key='education' 
               onClick={onDelete}
@@ -102,10 +108,22 @@ export default function EducationSection({ data, mode, onEdit, currentEdited, on
             Delete
             </button>
             {mode === 'edit' && 
-              <button className='border p-1 rounded w-1/3' data-key='education' onClick={onSubmit}>Save</button>
+              <button 
+                className='border p-1 rounded w-1/3 btn-transition' 
+                data-key='education' 
+                onClick={onSubmit}
+              >
+              Save
+              </button>
             }
             {mode === 'add' &&
-              <button className='border p-1 rounded w-1/3' data-key='education' onClick={onSubmit}>Submit</button>
+              <button 
+                className='border p-1 rounded w-1/3 btn-transition' 
+                data-key='education' 
+                onClick={onSubmit}
+              >
+              Submit
+              </button>
             }
           </div>
         </form>

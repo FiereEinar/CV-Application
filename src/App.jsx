@@ -184,6 +184,7 @@ function App() {
           onSubmit={onSubmit}
           onAdd={addExperienceHandler}
           onCancel={onCancel}
+          onDelete={onDelete}
         />
       </div>
       <Resume

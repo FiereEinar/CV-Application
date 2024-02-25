@@ -1,7 +1,7 @@
 import InputField from './InputField.jsx'
 import { useState } from 'react'
 
-export default function ExperienceSection({ data, mode, onEdit, currentEdited, onTypeEdit, onSubmit, onAdd, onCancel }) {
+export default function ExperienceSection({ data, mode, onEdit, onDelete, currentEdited, onTypeEdit, onSubmit, onAdd, onCancel }) {
   const [isOpen, setIsOpen] = useState(false)
   
   const expandComponent = (e) => {
@@ -12,7 +12,8 @@ export default function ExperienceSection({ data, mode, onEdit, currentEdited, o
   return (
     <div className=' flex flex-col gap-3'>
       <button
-        className='p-2 border rounded shadow' 
+        className='p-2 border rounded shadow
+        btn-transition' 
         data-key='experience'
         onClick={expandComponent}
       >
@@ -21,9 +22,13 @@ export default function ExperienceSection({ data, mode, onEdit, currentEdited, o
       {isOpen && mode === 'none' &&
         <div>
           <div className='flex flex-col gap-1 my-1 justify-center items-center'>
+            {data.length === 0 &&
+              <p>No items here...</p>
+            }
             {data.map((exp) => (
               <button 
-                className='border p-2 rounded w-48 truncate' 
+                className='border p-2 rounded w-48 truncate
+                btn-transition' 
                 key={exp.id}
                 id={exp.id}
                 data-key='experience'
@@ -35,7 +40,8 @@ export default function ExperienceSection({ data, mode, onEdit, currentEdited, o
           </div>
           <button 
             data-key='experience' 
-            className='p-2 border w-full rounded bg-blue-200 mt-2' 
+            className='p-2 border w-full rounded 
+            transition-all bg-blue-100 hover:bg-blue-200 mt-2' 
             onClick={onAdd}
           >
             Add Experience +
@@ -93,12 +99,39 @@ export default function ExperienceSection({ data, mode, onEdit, currentEdited, o
             onChange={onTypeEdit}
           />
           <div className=' flex justify-evenly p-2'>
-            <button className='border p-1 rounded w-1/3' data-mode={mode} data-key='experience' onClick={onCancel}>Cancel</button>
+            <button 
+              className='border p-1 rounded w-1/3 btn-transition' 
+              data-mode={mode} 
+              data-key='experience' 
+              onClick={onCancel}
+            >
+            Cancel
+            </button>
+            <button 
+              className='border p-1 rounded w-1/3 btn-transition' 
+              data-mode={mode} 
+              data-key='experience' 
+              onClick={onDelete}
+            >
+            Delete
+            </button>
             {mode === 'edit' && 
-              <button className='border p-1 rounded w-1/3' data-key='experience' onClick={onSubmit}>Save</button>
+              <button 
+                className='border p-1 rounded w-1/3 btn-transition' 
+                data-key='experience' 
+                onClick={onSubmit}
+              >
+              Save
+              </button>
             }
             {mode === 'add' &&
-              <button className='border p-1 rounded w-1/3' data-key='experience' onClick={onSubmit}>Submit</button>
+              <button 
+                className='border p-1 rounded w-1/3 btn-transition' 
+                data-key='experience' 
+                onClick={onSubmit}
+              >
+              Submit
+              </button>
             }
           </div>
         </form>
